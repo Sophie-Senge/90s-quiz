@@ -5,35 +5,77 @@
 
 // ]
 
-let currentQuestion = 0;
+// let currentQuestion = 0;
+// ---------------------------------------
+
+let startButtonEl = document.querySelector("#start");
+let timeEl = document.querySelector("#time");
+let choicesEl = document.querySelector("#choices");
 
 
 //create countdown timer
-let timeButtonEl = document.querySelector("#time");
+// * A start button that when clicked a timer starts and the first question appears.
+
 let startingTime = 100;
-let timeRunning = setInterval('startCountdown()', 1000);
+
+
+function startCountdown(event) {
+
+// does this mean i won't be able to subtract 10?
+  let timeRunning = setInterval(function () {
+    timeEl.textContent = startingTime;
+    startingTime--;
+    if (startingTime <= 0) {
+      // gameOver notice add class here put below in that class
+      clearInterval(timeRunning);
+    }
+
+  }, 1000);
+
  
 
-function startCountdown(event){
-  // timeButtonEl.value = 100;
- if (startingTime <= 0){
-  clearTimeout(timeRunning);
- }
- else {
-  timeButtonEl.innerHTML = startingTime;
-  startingTime--;
-  
- }
-  
+  console.log(event);
 }
 
 
-// * A start button that when clicked a timer starts and the first question appears.
-const startButtonEl = document.querySelector("#start");
+
+// create questions
+let questions = [
+  {
+    title: "What fashion accessory was invented by a high school shop teacher?",
+    answerOptions: ["The Scrunchie", "Slap Braclets", "Charm Braclets", "Fanny Packs"],
+    correctAnswer: "Slap Braclets"
+  },
+  {
+    title: "What was the first rap song to hit No. 1 on the Billboard Hot 100?",
+    answerOptions: ["Sabotage", "Can I Kick It?", "Doo Wop (That thing)", "Ice Ice Baby"],
+    correctAnswer: "Ice Ice Baby"
+  },
+  {
+    title: "When was the World Wide Web first introduced?",
+    answerOptions: ["1991", "1992", "1993", "1994"],
+    correctAnswer: "1993" 
+
+  },
+  {
+    title: "What is considered the first reality TV show?",
+    answerOptions: ["Real World", "Survivor", "Big Brother", "Queer Eye"],
+    correctAnswer: "Queer Eye" 
+  }
+ 
+
+
+]
+
+let currentQuestion = 0;
+
+document.querySelector("#question-title")
 
 //listen for a click event on start button
-startButtonEl.addEventListener("click", startCountdown);
- 
+startButtonEl.addEventListener("click", function(){
+  startCountdown();
+});
+
 // * Questions contain buttons for each answer.
 // * 
 // * When answer is clicked, the next question appears
