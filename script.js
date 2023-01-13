@@ -9,14 +9,14 @@ let currentQuestion = 0;
 
 
 //create countdown timer
-let timeButtonEl = document.getElementById('time');
+let timeButtonEl = document.querySelector("#time");
 let startingTime = 100;
-let timeRunning = setInterval('updateCountdown()', 1000);
+let timeRunning = setInterval('startCountdown()', 1000);
+ 
 
-
-function updateCountdown(){
-
- if (startingTime === 0){
+function startCountdown(event){
+  // timeButtonEl.value = 100;
+ if (startingTime <= 0){
   clearTimeout(timeRunning);
  }
  else {
@@ -32,7 +32,7 @@ function updateCountdown(){
 const startButtonEl = document.querySelector("#start");
 
 //listen for a click event on start button
-startButtonEl.addEventListener("click", updateCountdown());
+startButtonEl.addEventListener("click", startCountdown);
  
 // * Questions contain buttons for each answer.
 // * 
