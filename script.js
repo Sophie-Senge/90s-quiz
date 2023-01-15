@@ -39,14 +39,14 @@ let questionTitleEl = document.querySelector("#question-title")
 
 //create countdown timer
 // * A start button that when clicked a timer starts and the first question appears.
-let startingTime = 100;
-function startCountdown() {
 
+function startCountdown() {
+  let startingTime = 100;
   // does this mean i won't be able to subtract 10?
     let timeRunning = setInterval(function () {
       timeEl.textContent = startingTime;
       startingTime--;
-      if (startingTime <= 0) {
+      if (startingTime === 0) {
         // gameOver notice add class here put below in that class
         clearInterval(timeRunning);
       }
@@ -68,22 +68,38 @@ function startQuiz(){
 function displayQuestion(){
    let newQuestion = questions[currentQuestion];
   questionTitleEl.textContent = newQuestion.title;
-  console.log(questions[currentQuestion]);
+  // console.log(questions[currentQuestion]);
+
+  // clear old question
+  choicesEl.innerHTML = "";
 
   //loop over choices and display
-  newQuestion.answerOptions.forEach((answerOptions, i) => {
+  newQuestion.answerOptions.forEach((answerOptions) => {
     
   
   let choiceButton = document.createElement("button");
-  choiceButton.setAttribute("class", "AnswerOptions");
+  choiceButton.setAttribute("class", "answerOptions");
   choiceButton.setAttribute("value", answerOptions);
   choiceButton.textContent = answerOptions;
-
+ 
   choicesEl.appendChild(choiceButton);
+  // console.log(newQuestion.answerOptions);
+  
 });
 
 }
-
+choicesEl.addEventListener("click", function(event){
+  
+  if(event.target.matches("button")){
+    currentQuestion++;
+    // console.log(event.target.getAttribute("value", "data-index")) 
+    for (let i = 0; i < questions[currentQuestion].answerOptions.length; i++) {
+      console.log(questions[currentQuestion].answerOptions[i]);
+      
+    }
+  }
+  displayQuestion();
+})
 
 
 
