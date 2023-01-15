@@ -66,9 +66,22 @@ function startQuiz(){
 
 // function to display the questions
 function displayQuestion(){
-   let newQuestion = questions[currentQuestion].title;
-  questionTitleEl.textContent = newQuestion;
+   let newQuestion = questions[currentQuestion];
+  questionTitleEl.textContent = newQuestion.title;
   console.log(questions[currentQuestion]);
+
+  //loop over choices and display
+  newQuestion.answerOptions.forEach((answerOptions, i) => {
+    
+  
+  let choiceButton = document.createElement("button");
+  choiceButton.setAttribute("class", "AnswerOptions");
+  choiceButton.setAttribute("value", answerOptions);
+  choiceButton.textContent = answerOptions;
+
+  choicesEl.appendChild(choiceButton);
+});
+
 }
 
 
