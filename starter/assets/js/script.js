@@ -48,11 +48,12 @@ startButtonEl.addEventListener("click", function(){
 
 //create countdown timer
 // * A start button that when clicked a timer starts and the first question appears.
-let timeRunning = 0;
+let timeRunning;
+let startingTime = 100;
 function startCountdown() {
-  let startingTime = 100;
+  
   // does this mean i won't be able to subtract 10?
-    let timeRunning = setInterval(function () {
+     timeRunning = setInterval(function () {
       timeEl.textContent = startingTime;
       startingTime--;
       if (startingTime === 0) {
@@ -137,7 +138,7 @@ function endQuiz(){
   // remove hidden from final screen
   
 
-  finalScoreEl.textContent = timeRunning;
+  finalScoreEl.textContent = startingTime;
 
   questionsEl.setAttribute("class", "hide");
   endScreenEl.removeAttribute("class");
