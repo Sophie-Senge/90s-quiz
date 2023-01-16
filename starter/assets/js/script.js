@@ -37,6 +37,7 @@ let questionsEl = document.querySelector("#questions");
 let questionTitleEl = document.querySelector("#question-title");
 let finalScoreEl = document.querySelector("#final-score");
 let endScreenEl = document.querySelector("#end-screen");
+let initialsSubmitBtn = document.querySelector("#submit");
 
 //listen for a click event on start button
 //clock needs to countdown, start screen needs to hide, questions need to unhide with setattribute 
@@ -146,6 +147,12 @@ function endQuiz(){
 
 }
 
+initialsSubmitBtn.addEventListener("click", function(){
+  let initials = document.querySelector("#initials").value;
+
+  localStorage.setItem("initials", initials);
+  renderLastRegistered();
+})
 
 // * If the answer clicked was incorrect then subtract time from the clock
 
