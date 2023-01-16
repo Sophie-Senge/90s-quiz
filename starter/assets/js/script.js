@@ -27,19 +27,28 @@ let questions = [
 ]
 let currentQuestion = 0;
 console.log(questions[currentQuestion].answerOptions[0]);
+console.log (questions.length)
 // ---------------------------------------
 let startScreenEl = document.querySelector("#start-screen");
 let startButtonEl = document.querySelector("#start");
 let timeEl = document.querySelector("#time");
 let choicesEl = document.querySelector("#choices");
 let questionsEl = document.querySelector("#questions");
-let questionTitleEl = document.querySelector("#question-title")
+let questionTitleEl = document.querySelector("#question-title");
+let finalScoreEl = document.querySelector("#final-score");
+let endScreenEl = document.querySelector("#end-screen");
 
-
+//listen for a click event on start button
+//clock needs to countdown, start screen needs to hide, questions need to unhide with setattribute 
+startButtonEl.addEventListener("click", function(){
+  startCountdown();
+  startQuiz();
+  displayQuestion();
+});
 
 //create countdown timer
 // * A start button that when clicked a timer starts and the first question appears.
-
+let timeRunning = 0;
 function startCountdown() {
   let startingTime = 100;
   // does this mean i won't be able to subtract 10?
@@ -54,6 +63,62 @@ function startCountdown() {
     }, 1000); 
   }
   
+
+
+// function to display the questions
+function displayQuestion(){
+   let newQuestion = questions[currentQuestion];
+  questionTitleEl.textContent = newQuestion.title;
+  console.log(questions[currentQuestion].title);
+
+  // clear old question
+  choicesEl.innerHTML = "";
+
+  //loop over choices to display
+  newQuestion.answerOptions.forEach((answerOptions) => {
+    
+  
+  let choiceButton = document.createElement("button");
+  // choiceButton.setAttribute("class", "answerOptions");
+  // choiceButton.setAttribute("value", answerOptions);
+  choiceButton.textContent = answerOptions;
+ 
+  choicesEl.appendChild(choiceButton);
+  // console.log(newQuestion.answerOptions);
+  
+});
+
+}
+
+// cycle through the questions and answers
+choicesEl.addEventListener("click", function(event){
+  
+  if(event.target.matches("button")){
+    currentQuestion++;
+    if (currentQuestion < questions.length){
+    displayQuestion();
+    }
+    else {
+      endQuiz();
+    }
+    // // console.log(event.target.getAttribute("value", "data-index")) 
+    // for (let currentQuestion = 0; currentQuestion < questions.length; currentQuestion++) {
+    //  if (currentQuestion < questions.length) {
+    //   displayQuestion();
+    //  } else {
+    //   endQuiz();
+    // }
+     
+     // console.log(questions[i]);
+      // console.log(questions[currentQuestion].answerOptions[i]);
+      
+    }  
+    
+    // else statement to end
+  
+ 
+})
+
 //start screen function
 
 function startQuiz(){
@@ -64,57 +129,23 @@ function startQuiz(){
 
 }
 
-// function to display the questions
-function displayQuestion(){
-   let newQuestion = questions[currentQuestion];
-  questionTitleEl.textContent = newQuestion.title;
-  // console.log(questions[currentQuestion]);
 
-  // clear old question
-  choicesEl.innerHTML = "";
+function endQuiz(){
+  //stop timer
+  clearInterval(timeRunning);
 
-  //loop over choices and display
-  newQuestion.answerOptions.forEach((answerOptions) => {
-    
+  // remove hidden from final screen
   
-  let choiceButton = document.createElement("button");
-  choiceButton.setAttribute("class", "answerOptions");
-  choiceButton.setAttribute("value", answerOptions);
-  choiceButton.textContent = answerOptions;
- 
-  choicesEl.appendChild(choiceButton);
-  // console.log(newQuestion.answerOptions);
+
+  finalScoreEl.textContent = timeRunning;
+
+  questionsEl.setAttribute("class", "hide");
+  endScreenEl.removeAttribute("class");
   
-});
 
 }
-choicesEl.addEventListener("click", function(event){
-  
-  if(event.target.matches("button")){
-    currentQuestion++;
-    // console.log(event.target.getAttribute("value", "data-index")) 
-    for (let i = 0; i < questions[currentQuestion].answerOptions.length; i++) {
-      console.log(questions[currentQuestion].answerOptions[i]);
-      
-    }
-  }
-  displayQuestion();
-})
 
 
-
-//listen for a click event on start button
-//clock needs to countdown, start screen needs to hide, questions need to unhide with setattribute 
-startButtonEl.addEventListener("click", function(){
-  startCountdown();
-  startQuiz();
-  displayQuestion();
-});
-
-// * Questions contain buttons for each answer.
-// * 
-// * When answer is clicked, the next question appears
-// * 
 // * If the answer clicked was incorrect then subtract time from the clock
 
 // * The quiz should end when all questions are answered or the timer reaches 0.
