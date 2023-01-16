@@ -2,13 +2,13 @@ let highscoresEl = document.querySelector("#highscores");
 let clearHighscoresBtn = document.querySelector("#clear");
 
 
-let initials;
 renderLastRegistered();
 
 function renderLastRegistered(){
+  score = localStorage.getItem("score");
 
   initials = JSON.parse(localStorage.getItem("initials"));
-  highscoresEl.textContent = initials;
+  highscoresEl.textContent = initials + (" — ") + score;
   console.log(initials);
 }
 
@@ -18,3 +18,6 @@ clearHighscoresBtn.addEventListener("click", function(event){
  
   
 })
+
+
+// localStorage.setItem("score", (startingTime));

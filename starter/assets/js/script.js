@@ -149,10 +149,11 @@ function endQuiz(){
 }
 
 initialsSubmitBtn.addEventListener("click", function(){
-  let initials = document.querySelector("#initials").value;
+  let initials = document.querySelector("#initials");
 
-  localStorage.setItem("initials", JSON.stringify(initials));
+  localStorage.setItem("initials", initials);
   location.href = "highscores.html";
+  renderLastRegistered();
   
 })
 
