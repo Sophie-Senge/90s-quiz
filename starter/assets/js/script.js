@@ -140,6 +140,7 @@ function endQuiz(){
   
 
   finalScoreEl.textContent = startingTime;
+  localStorage.setItem("score", (startingTime));
 
   questionsEl.setAttribute("class", "hide");
   endScreenEl.removeAttribute("class");
@@ -150,8 +151,9 @@ function endQuiz(){
 initialsSubmitBtn.addEventListener("click", function(){
   let initials = document.querySelector("#initials").value;
 
-  localStorage.setItem("initials", initials);
-  renderLastRegistered();
+  localStorage.setItem("initials", JSON.stringify(initials));
+  location.href = "highscores.html";
+  
 })
 
 // * If the answer clicked was incorrect then subtract time from the clock
