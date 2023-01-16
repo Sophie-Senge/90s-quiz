@@ -12,6 +12,10 @@ function renderLastRegistered(){
   console.log(initials);
 }
 
-clearHighscoresBtn.addEventListener("click", function(){
-  
+clearHighscoresBtn.addEventListener("click", function(event){
+  highscoresEl.innerHTML = "";
+  if(event.target.matches("button")){
+  highscoresEl = localStorage.clear();
+ 
+  }
 })
