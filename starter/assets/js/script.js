@@ -100,7 +100,7 @@ function evaluateAnswers(event){
   }
 choicesEl.innerHTML = "";
 
-   questionNum++;
+   
    if (questionNum < questions.length){
     displayQuestion();
    } else{
