@@ -3,28 +3,26 @@ let questions = [
   {
     title: "What fashion accessory was invented by a high school shop teacher?",
     answerOptions: ["The Scrunchie", "Slap Braclets", "Charm Braclets", "Fanny Packs"],
-    correctAnswer: 2
+    correctAnswer: "Slap Braclet"
   },
   {
     title: "What was the first rap song to hit No. 1 on the Billboard Hot 100?",
     answerOptions: ["Sabotage", "Can I Kick It?", "Doo Wop (That thing)", "Ice Ice Baby"],
-    correctAnswer: 4
+    correctAnswer: "Ice Ice Baby"
   },
   {
     title: "When was the World Wide Web first introduced?",
     answerOptions: ["1991", "1992", "1993", "1994"],
-    correctAnswer: 3
+    correctAnswer: "1993"
 
   },
   {
     title: "What is considered the first reality TV show?",
     answerOptions: ["Real World", "Survivor", "Big Brother", "Queer Eye"],
-    correctAnswer: 1
+    correctAnswer: "Real World"
   }
- 
-
-
 ]
+
 let currentQuestion = 0;
 console.log(questions[currentQuestion].answerOptions[0]);
 console.log (questions.length)
@@ -38,7 +36,7 @@ let questionTitleEl = document.querySelector("#question-title");
 let finalScoreEl = document.querySelector("#final-score");
 let endScreenEl = document.querySelector("#end-screen");
 let initialsSubmitBtn = document.querySelector("#submit");
-
+let feedbackEl = document.querySelector("#feedback");
 //listen for a click event on start button
 //clock needs to countdown, start screen needs to hide, questions need to unhide with setattribute 
 startButtonEl.addEventListener("click", function(){
@@ -84,7 +82,7 @@ function displayQuestion(){
   // choiceButton.setAttribute("class", "answerOptions");
   // choiceButton.setAttribute("value", answerOptions);
   choiceButton.textContent = answerOptions;
- 
+    choiceButton.addEventListener('click', evaluateAnswers)
   choicesEl.appendChild(choiceButton);
   // console.log(newQuestion.answerOptions);
   
@@ -92,17 +90,44 @@ function displayQuestion(){
 
 }
 
+// function to display right or wrong answers
+
+function evaluateAnswers(event){
+  event.preventDefault()
+  console.log(event)
+  console.log(event.target)
+  console.log(this.innerHTML)
+  // if user chose wrong answer
+  if (this.innerHTML !== questions[currentQuestion].correctAnswer){
+    startingTime -= 10;
+    timeEl.textContent = startingTime;
+    feedbackEl.textContent = "Incorrect!";
+    // time at zero?
+  }
+  else{
+    //show the other feedback
+    console.log("Condition is good")
+  }
+  //check if quiz is over
+  //if not, move your index up, and call to show Question again.
+
+
+}
+
 // cycle through the questions and answers
-choicesEl.addEventListener("click", function(event){
-  
-  if(event.target.matches("button")){
-    currentQuestion++;
-    if (currentQuestion < questions.length){
-    displayQuestion();
-    }
-    else {
-      endQuiz();
-    }
+// choicesEl.addEventListener("click", function(event){
+//   console.log(event)
+//   console.log(event.target)
+//   if(event.target.matches("button")){
+//     currentQuestion++;
+//     if (currentQuestion < questions.length){
+//     displayQuestion();
+//     }
+//     else {
+//       endQuiz();
+//     }
+// }  
+// })
     // // console.log(event.target.getAttribute("value", "data-index")) 
     // for (let currentQuestion = 0; currentQuestion < questions.length; currentQuestion++) {
     //  if (currentQuestion < questions.length) {
@@ -114,12 +139,10 @@ choicesEl.addEventListener("click", function(event){
      // console.log(questions[i]);
       // console.log(questions[currentQuestion].answerOptions[i]);
       
-    }  
     
     // else statement to end
   
  
-})
 
 //start screen function
 
@@ -144,19 +167,35 @@ function endQuiz(){
 
   questionsEl.setAttribute("class", "hide");
   endScreenEl.removeAttribute("class");
-  
 
 }
 
 initialsSubmitBtn.addEventListener("click", function(){
-  let initials = document.querySelector("#initials");
-
-  localStorage.setItem("initials", initials);
+  var pastScores = JSON.parse(localStorage.getItem("history"))
+  let initialsVal = document.querySelector("#initials").value;
+  pastScores.push({
+  initials: initialsVal,
+  score: startingTime
+  })
+  localStorage.setItem("history", JSON.stringify(pastScores));
   location.href = "highscores.html";
-  renderLastRegistered();
+  // renderLastRegistered();
   
 })
 
+function loadStorage(){
+  var pastScores = JSON.parse(localStorage.getItem("history"))
+  console.log(pastScores)
+  if(pastScores === null){
+    pastScores = []
+    localStorage.setItem("history", JSON.stringify(pastScores))
+    return
+  }
+
+}
+
+
+loadStorage()
 // * If the answer clicked was incorrect then subtract time from the clock
 
 // * The quiz should end when all questions are answered or the timer reaches 0.

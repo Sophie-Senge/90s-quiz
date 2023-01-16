@@ -2,22 +2,35 @@ let highscoresEl = document.querySelector("#highscores");
 let clearHighscoresBtn = document.querySelector("#clear");
 
 
-renderLastRegistered();
 
-function renderLastRegistered(){
-  score = localStorage.getItem("score");
 
-  initials = JSON.parse(localStorage.getItem("initials"));
-  highscoresEl.textContent = initials + (" — ") + score;
-  console.log(initials);
+
+function loadStorage(){
+  var pastScores = JSON.parse(localStorage.getItem("history"))
+  console.log(pastScores)
+  if(pastScores === null){
+    return
+  }
+  console.log(pastScores)  
+  for(let i=0; i< pastScores.length; i++){
+    console.log(pastScores[i])
+    var li = document.createElement("li")
+    var text = pastScores[i].initials + " : " + pastScores[i].score
+    console.log(text)
+    li.textContent = text
+    highscoresEl.append(li)
+  }
+
 }
 
-clearHighscoresBtn.addEventListener("click", function(event){
+loadStorage()
+
+
+
+// clear local storage  
+clearHighscoresBtn.addEventListener("click", function(){
   highscoresEl.innerHTML = "";
-  highscoresEl = localStorage.clear();
- 
-  
+ localStorage.removeItem("history")
 })
 
 
-// localStorage.setItem("score", (startingTime));
