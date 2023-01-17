@@ -39,7 +39,7 @@ let initialsSubmitBtn = document.querySelector("#submit");
 let feedbackEl = document.querySelector("#feedback");
 //listen for a click event on start button
 //clock needs to countdown, start screen needs to hide, questions need to unhide with setattribute 
-startButtonEl.addEventListener("click", function(){
+startButtonEl.addEventListener("click", function () {
   startCountdown();
   startQuiz();
   displayQuestion();
@@ -48,145 +48,100 @@ startButtonEl.addEventListener("click", function(){
 //create countdown timer
 // * A start button that when clicked a timer starts and the first question appears.
 let timeRunning;
-let startingTime = 100;
+let startingTime = 90;
 function startCountdown() {
-  
-  
-     timeRunning = setInterval(function () {
-      timeEl.textContent = startingTime;
-      startingTime--;
-      if (startingTime === 0) {
-        // gameOver notice add class here put below in that class
-        clearInterval(timeRunning);
-      }
-   
-    }, 1000); 
-  }
-  
 
 
-// function to display the questions
+  timeRunning = setInterval(function () {
+    timeEl.textContent = startingTime;
+    startingTime--;
+    if (startingTime === 0) {
+      // gameOver notice add class here put below in that class
+      clearInterval(timeRunning);
+    }
+
+  }, 1000);
+}
+
+
+
+
 
 
 // function to remove time for wrong answers or move on for correct answers
 
-function evaluateAnswers(event){
-  feedbackEl.setAttribute ("class", "feedback");
+function evaluateAnswers(event) {
+  feedbackEl.setAttribute("class", "feedback");
   event.preventDefault()
   // console.log(event)
   // console.log(event.target)
   // console.log(this.innerHTML)
   // console.log(this.value)
   // correct answer
-  if (this.innerHTML === questions[questionNum].correctAnswer){
+  if (this.innerHTML === questions[questionNum].correctAnswer) {
     // console.log("Condition is good");
     feedbackEl.textContent = "Um duh!";
-    feedbackEl.style.color = "#B24BF3"; 
-    let correctSound = new Audio ("./assets/sfx/correct.wav");
-    correctSound.play(); 
+    feedbackEl.style.color = "#B24BF3";
+    let correctSound = new Audio("./assets/sfx/correct.wav");
+    correctSound.play();
     questionNum++;
   }
-  else{
+  else {
     startingTime -= 10;
-    if(startingTime < 0){
+    if (startingTime < 0) {
       startingTime = 0
     }
     timeEl.textContent = startingTime;
     feedbackEl.textContent = "Ugh, as if!";
-    feedbackEl.style.color = "#EA3C53";  
-    let incorrectSound = new Audio ("./assets/sfx/incorrect.wav");
+    feedbackEl.style.color = "#EA3C53";
+    let incorrectSound = new Audio("./assets/sfx/incorrect.wav");
     incorrectSound.play();
-    
-  }
-choicesEl.innerHTML = "";
 
-   
-   if (questionNum < questions.length){
+  }
+  //clear 
+  choicesEl.innerHTML = "";
+
+
+  if (questionNum < questions.length) {
     displayQuestion();
-   } else{
+  } else {
     endQuiz();
-   }
-    
   }
-  
-  //check if quiz is over
-  //if not, move your index up, and call to show Question again.
+
+}
 
 
+// function to display the questions
 
-
-
-function displayQuestion(){
+function displayQuestion() {
   let visibleQuestion = questions[questionNum].title;
   // console.log(visibleQuestion);
 
   questionTitleEl.textContent = visibleQuestion;
 
+  // to loop through the answer options and display
   for (let i = 0; i < questions[questionNum].answerOptions.length; i++) {
     let choicesButton = document.createElement("button");
     choicesButton.textContent = questions[questionNum].answerOptions[i];
     // console.log(questions[questionNum].answerOptions[i]);
+    // adding the evaluation function to the choice button
     choicesButton.addEventListener("click", evaluateAnswers);
     choicesEl.appendChild(choicesButton);
-    
+
   }
 
 
-//   let newQuestion = questions[currentQuestion];
-//  questionTitleEl.textContent = newQuestion.title;
-//  // console.log(questions[currentQuestion].title);
 
-//  // clear old question
-//  choicesEl.innerHTML = "";
-
-//  //loop over choices to display
-//  newQuestion.answerOptions.forEach((answerOptions) => {
-   
- 
-//  let choiceButton = document.createElement("button");
-//  // choiceButton.setAttribute("class", "answerOptions");
-//  // choiceButton.setAttribute("value", answerOptions);
-//  choiceButton.textContent = answerOptions;
-//    choiceButton.addEventListener('click', evaluateAnswers);
-//  choicesEl.appendChild(choiceButton);
-//  // console.log(newQuestion.answerOptions);
- 
-// });
 
 }
-// cycle through the questions and answers
-// choicesEl.addEventListener("click", function(event){
-//   console.log(event)
-//   console.log(event.target)
-//   if(event.target.matches("button")){
-//     currentQuestion++;
-//     if (currentQuestion < questions.length){
-//     displayQuestion();
-//     }
-//     else {
-//       endQuiz();
-//     }
-// }  
-// })
-    // // console.log(event.target.getAttribute("value", "data-index")) 
-    // for (let currentQuestion = 0; currentQuestion < questions.length; currentQuestion++) {
-    //  if (currentQuestion < questions.length) {
-    //   displayQuestion();
-    //  } else {
-    //   endQuiz();
-    // }
-     
-     // console.log(questions[i]);
-      // console.log(questions[currentQuestion].answerOptions[i]);
-      
-    
-    // else statement to end
-  
- 
+
+
+
+
 
 //start screen function
 
-function startQuiz(){
+function startQuiz() {
   // hide start screen
   startScreenEl.setAttribute("class", "hide");
   // un hide first question
@@ -194,13 +149,13 @@ function startQuiz(){
 
 }
 
-
-function endQuiz(){
+// end screen function
+function endQuiz() {
   //stop timer
   clearInterval(timeRunning);
 
   // remove hidden from final screen
-  
+
 
   finalScoreEl.textContent = startingTime;
   localStorage.setItem("score", (startingTime));
@@ -210,23 +165,23 @@ function endQuiz(){
 
 }
 
-initialsSubmitBtn.addEventListener("click", function(){
+initialsSubmitBtn.addEventListener("click", function () {
   let pastScores = JSON.parse(localStorage.getItem("history"))
   let initialsVal = document.querySelector("#initials").value;
   pastScores.push({
-  initials: initialsVal,
-  score: startingTime
+    initials: initialsVal,
+    score: startingTime
   })
   localStorage.setItem("history", JSON.stringify(pastScores));
   location.href = "highscores.html";
-  
-  
-})
 
-function loadStorage(){
+
+})
+// load highscores array to local storage
+function loadStorage() {
   let pastScores = JSON.parse(localStorage.getItem("history"))
   console.log(pastScores)
-  if(pastScores === null){
+  if (pastScores === null) {
     pastScores = []
     localStorage.setItem("history", JSON.stringify(pastScores))
     return
@@ -236,8 +191,4 @@ function loadStorage(){
 
 
 loadStorage()
-// * If the answer clicked was incorrect then subtract time from the clock
 
-// * The quiz should end when all questions are answered or the timer reaches 0.
-
-// * When the game ends, it should display their score and give the user the ability to save their initials and their score
