@@ -81,8 +81,9 @@ function startCountdown() {
 // function to remove time for wrong answers or move on for correct answers
 
 function evaluateAnswers(event) {
+  event.preventDefault();
   feedbackEl.setAttribute("class", "feedback");
-  event.preventDefault()
+  
   // console.log(event)
   // console.log(event.target)
   // console.log(this.innerHTML)
