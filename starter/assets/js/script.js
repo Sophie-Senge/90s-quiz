@@ -20,6 +20,16 @@ let questions = [
     title: "What is considered the first reality TV show?",
     answerOptions: ["Real World", "Survivor", "Big Brother", "Queer Eye"],
     correctAnswer: "Real World"
+  },
+  {
+    title: "In the 1990s, which wide-leg jeans became a fashion favourite for children?",
+    answerOptions: ["Levis", "JNCO", "Calvin Klein", "Guess"],
+    correctAnswer: "JNCO"
+  },
+  {
+    title: "What was the name of the virtual pet simulation game that came in a tiny, egg-shaped electronic system and enabled users to eat, play with, and clean up after their pet?",
+    answerOptions: ["Chia Pet", "My Little Pony", "Tamagotchi", "Beanie Babies"],
+    correctAnswer: "Tamagotchi"
   }
 ]
 
@@ -154,12 +164,12 @@ function endQuiz() {
   //stop timer
   clearInterval(timeRunning);
 
-  // remove hidden from final screen
+  
 
 
   finalScoreEl.textContent = startingTime;
   localStorage.setItem("score", (startingTime));
-
+// remove hidden from final screen
   questionsEl.setAttribute("class", "hide");
   endScreenEl.removeAttribute("class");
 
@@ -180,7 +190,7 @@ initialsSubmitBtn.addEventListener("click", function () {
 // load highscores array to local storage
 function loadStorage() {
   let pastScores = JSON.parse(localStorage.getItem("history"))
-  console.log(pastScores)
+  // console.log(pastScores)
   if (pastScores === null) {
     pastScores = []
     localStorage.setItem("history", JSON.stringify(pastScores))
