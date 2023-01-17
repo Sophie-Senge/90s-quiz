@@ -99,7 +99,8 @@ function evaluateAnswers(event) {
   else {
     startingTime -= 10;
     if (startingTime < 0) {
-      startingTime = 0
+      startingTime = 0;
+      endQuiz();
     }
     timeEl.textContent = startingTime;
     feedbackEl.textContent = "Ugh, as if!";
