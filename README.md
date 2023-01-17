@@ -36,7 +36,7 @@ Create a code quiz that contains the following requirements:
 
 ### Screenshot
 
-![](./starter/assets/Screenshot%202023-01-17%20at%2010.18.19%20AM.png)
+![](./starter/assets/Screenshot%202023-01-17%20at%2010.35.29%20PM.png)
 
 ### Links
 
