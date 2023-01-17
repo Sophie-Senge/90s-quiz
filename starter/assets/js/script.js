@@ -82,7 +82,7 @@ function startCountdown() {
 
 function evaluateAnswers(event) {
   event.preventDefault();
-  feedbackEl.setAttribute("class", "feedback");
+  
   
   // console.log(event)
   // console.log(event.target)
@@ -91,11 +91,13 @@ function evaluateAnswers(event) {
   // correct answer
   if (this.innerHTML === questions[questionNum].correctAnswer) {
     // console.log("Condition is good");
+    feedbackDisplay();
     feedbackEl.textContent = "Um duh!";
     feedbackEl.style.color = "#B24BF3";
     let correctSound = new Audio("./assets/sfx/correct.wav");
     correctSound.play();
     questionNum++;
+   
   }
   else {
     startingTime -= 10;
@@ -103,7 +105,9 @@ function evaluateAnswers(event) {
       startingTime = 0;
       endQuiz();
     }
+   
     timeEl.textContent = startingTime;
+    feedbackDisplay();
     feedbackEl.textContent = "Ugh, as if!";
     feedbackEl.style.color = "#EA3C53";
     let incorrectSound = new Audio("./assets/sfx/incorrect.wav");
@@ -120,7 +124,19 @@ function evaluateAnswers(event) {
     endQuiz();
   }
 
+  // feedback function
+function feedbackDisplay(){
+  setTimeout(feedbackHide, 700);
+  feedbackEl.setAttribute("class", "feedback");
 }
+
+function feedbackHide(){
+  feedbackEl.setAttribute("class", "hide");
+}
+
+
+}
+
 
 
 // function to display the questions
