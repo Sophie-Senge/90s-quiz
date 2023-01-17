@@ -15,7 +15,7 @@ function loadStorage(){
   for(let i=0; i< pastScores.length; i++){
     console.log(pastScores[i])
     var li = document.createElement("li")
-    var text = pastScores[i].initials + " : " + pastScores[i].score
+    var text = pastScores[i].initials + " — " + pastScores[i].score
     console.log(text)
     li.textContent = text
     highscoresEl.append(li)

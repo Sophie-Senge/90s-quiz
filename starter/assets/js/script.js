@@ -80,7 +80,7 @@ function evaluateAnswers(event){
   // correct answer
   if (this.innerHTML === questions[questionNum].correctAnswer){
     // console.log("Condition is good");
-    feedbackEl.textContent = "Yay!";
+    feedbackEl.textContent = "Um duh!";
     feedbackEl.style.color = "#B24BF3"; 
     let correctSound = new Audio ("./assets/sfx/correct.wav");
     correctSound.play(); 
@@ -92,7 +92,7 @@ function evaluateAnswers(event){
       startingTime = 0
     }
     timeEl.textContent = startingTime;
-    feedbackEl.textContent = "Not this time!";
+    feedbackEl.textContent = "Ugh, as if!";
     feedbackEl.style.color = "#EA3C53";  
     let incorrectSound = new Audio ("./assets/sfx/incorrect.wav");
     incorrectSound.play();

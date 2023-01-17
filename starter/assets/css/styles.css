@@ -1,6 +1,13 @@
 body {
-  font-family: Arial;
-  font-size: 120%;
+  font-family: 'Maiden Orange', cursive;
+  font-size: 150%;
+  background-color:#90dcff;
+  color: #fdfb76;
+}
+
+h1 {
+  font-family: 'Oregano', cursive;
+  color: #e10086;
 }
 
 a {
@@ -50,7 +57,7 @@ li {
 }
 
 li:nth-child(odd) {
-  background-color: #f3edfc;
+  background-color: #00db96;
 }
 
 .wrapper {
