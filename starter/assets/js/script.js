@@ -65,7 +65,9 @@ function startCountdown() {
   timeRunning = setInterval(function () {
     timeEl.textContent = startingTime;
     startingTime--;
-    if (startingTime === 0) {
+    if (startingTime < 0) {
+      startingTime = 0;
+      endQuiz();
       // gameOver notice add class here put below in that class
       clearInterval(timeRunning);
     }
@@ -82,7 +84,7 @@ function startCountdown() {
 
 function evaluateAnswers(event) {
   event.preventDefault();
-  
+
   
   // console.log(event)
   // console.log(event.target)
@@ -157,7 +159,7 @@ function displayQuestion() {
     // adding the evaluation function to the choice button
     choicesButton.addEventListener("click", evaluateAnswers);
     choicesEl.appendChild(choicesButton);
-
+    
   }
 
 
