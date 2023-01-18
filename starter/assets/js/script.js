@@ -95,7 +95,7 @@ function evaluateAnswers(event) {
     feedbackEl.textContent = "Um duh!";
     feedbackEl.style.color = "#B24BF3";
     feedbackEl.style.borderTop = "thin solid #B24BF3"
-    let correctSound = new Audio("./assets/sfx/correct.wav");
+    let correctSound = new Audio("starter/assets/sfx/correct.wav");
     correctSound.play();
     questionNum++;
    
@@ -112,7 +112,7 @@ function evaluateAnswers(event) {
     feedbackEl.textContent = "Ugh, as if!";
     feedbackEl.style.color = "#EA3C53";
     feedbackEl.style.borderTop = "thin solid #EA3C53"
-    let incorrectSound = new Audio("./assets/sfx/incorrect.wav");
+    let incorrectSound = new Audio("starter/assets/sfx/incorrect.wav");
     incorrectSound.play();
 
   }
