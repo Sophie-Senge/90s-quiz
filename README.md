@@ -40,7 +40,7 @@ Create a code quiz that contains the following requirements:
 
 ### Links
 
-- Live Site URL: (https://sophie-senge.github.io/quiz_challenge/)
+- Live Site URL: (https://sophie-senge.github.io/90s-quiz/)
 
 ## My process
 
