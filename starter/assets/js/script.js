@@ -30,6 +30,11 @@ let questions = [
     title: "What was the name of the virtual pet simulation game that came in a tiny, egg-shaped electronic system and enabled users to eat, play with, and clean up after their pet?",
     answerOptions: ["Chia Pet", "My Little Pony", "Tamagotchi", "Beanie Babies"],
     correctAnswer: "Tamagotchi"
+  },
+  {
+    title: "What was the best selling videogame console of the 90's",
+    answerOptions: ["Sega Genisus", "Nintendo 64", "Playstation", "Sega Saturn"],
+    correctAnswer: "Tamagotchi"
   }
 ]
 
